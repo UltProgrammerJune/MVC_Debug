@@ -40,7 +40,7 @@ public class StudentsController : Controller
         return View(students);
     }
 
-    // GET: Students/Details/5
+    // GET: Students/Details
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -113,6 +113,7 @@ public class StudentsController : Controller
             try
             {
                 _context.Update(student);
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -157,6 +158,7 @@ public class StudentsController : Controller
         if (student != null)
         {
             _context.Student.Remove(student);
+            await _context.SaveChangesAsync();
         }
 
         return RedirectToAction(nameof(Index));
